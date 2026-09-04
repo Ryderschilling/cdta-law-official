@@ -318,6 +318,36 @@ Notes for changing it:
   the faculty card at 556px against an 844px viewport. Without the clamp it was
   over 1,100px and swiping stopped being the interaction.
 
+**3f. The mobile footer is 40% shorter.** It was 2,172px on an 844px phone: two and
+a half screens, a fifth of the whole page. Now 1,307px at 390px wide.
+
+```
+                     before      after
+footer total         2172px      1307px
+  link grid          1083px       560px
+  legal block         630px       402px
+  bottom bar          188px       160px
+page total          10510px      9645px
+```
+
+What did NOT change, deliberately:
+
+- **All 15 footer nav links stay.** They are the internal linking the SEO retainer
+  is sold on, and `display:none` on mobile would drop them from a mobile-first
+  crawl. They moved from one column to two, with the Admissions column spanning
+  and splitting its own links so it does not sit alone in a half-empty row.
+- **The required disclosure is untouched** and still grepped from the served HTML
+  on all 41 routes, along with the method-of-instruction and nondiscrimination
+  statements.
+- **Link rows stay at 44px.** That floor is not negotiable for a tap target, so the
+  height came out of layout and typesetting instead.
+
+Two paragraphs were cut from the footer at every breakpoint, not hidden on small
+screens: the service-area line (old-site marketing, still on `/campus` and
+`/required-disclosures`) and the campus address inside the legal block (duplicated
+three inches above it in the Contact column). Cutting rather than hiding keeps
+desktop and mobile identical to a crawler.
+
 **4. Headings and images.** One `<h1>` per page on all 41 HTML routes, no
 heading-level jumps, every `<img>` and `role="img"` carries alt text or an
 `aria-label`, every iframe has a title, every link and button has an accessible

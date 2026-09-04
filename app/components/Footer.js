@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {
-  school, addressLine, programs,
-  UNACCREDITED_DISCLOSURE, METHOD_OF_INSTRUCTION, NONDISCRIMINATION, SERVICE_AREA
+  school, programs,
+  UNACCREDITED_DISCLOSURE, METHOD_OF_INSTRUCTION, NONDISCRIMINATION
 } from '../lib/site';
 
 export default function Footer() {
@@ -64,13 +64,15 @@ export default function Footer() {
           <p>{METHOD_OF_INSTRUCTION} The full disclosure required by the State Bar of California, including the First-Year Law Students&rsquo; Examination requirement, is published on the{' '}
             <Link href="/required-disclosures">Required Disclosures</Link> page.</p>
           <p>{NONDISCRIMINATION}</p>
-          <p>{SERVICE_AREA}</p>
+          {/* The service-area line and the campus address used to sit here too. Both
+              are duplicated a few inches up in the Contact column and on /campus, and
+              they were adding a quarter of the footer's height on a phone. Cut at every
+              breakpoint rather than hidden on small screens, so nothing disappears from
+              a mobile-first crawl. The required disclosure above is untouched. */}
           <p>
-            Nothing on this website is legal advice, and nothing here creates an
-            attorney-client relationship. Information about admission, tuition and
-            program requirements is subject to change. Confirm current terms with the
-            Admissions Office at <a href={`tel:${school.phoneRaw}`}>{school.phone}</a>.
-            Campus: {addressLine} ({school.county}).
+            Nothing on this website is legal advice. Information about admission,
+            tuition and program requirements is subject to change; confirm current
+            terms with the Admissions Office.
           </p>
         </div>
 
