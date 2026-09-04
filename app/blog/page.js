@@ -21,9 +21,9 @@ export default function Blog() {
 
       <section className="prose">
         <div className="wrap">
-          <div className="post-grid" style={{ marginTop: 0 }}>
-            {posts.map((p, i) => (
-              <article className={`post-card reveal${i % 3 ? ` d${i % 3}` : ''}`} key={p.slug}>
+          <div className="post-grid cols-3" style={{ marginTop: 0 }}>
+            {posts.map((p) => (
+              <article className="post-card tile" key={p.slug}>
                 <div className="post-date">{p.dateLabel}</div>
                 <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 400, fontSize: 23, lineHeight: 1.24 }}>{p.title}</h2>
                 <p>{p.excerpt}</p>

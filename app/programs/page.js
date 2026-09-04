@@ -21,9 +21,9 @@ export default function Programs() {
 
       <section className="prose" style={{ paddingBottom: 30 }}>
         <div className="wrap">
-          <div className="dark-grid two" style={{ marginTop: 0 }}>
-            {programs.map((p, i) => (
-              <article className={`dcard reveal${i % 2 ? ' d1' : ''}`} key={p.slug}>
+          <div className="dark-grid two cols-2" style={{ marginTop: 0 }}>
+            {programs.map((p) => (
+              <article className="dcard tile" key={p.slug}>
                 <div className="idx">( {p.num} )</div>
                 <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 400, fontSize: 26, marginBottom: 12 }}>{p.name}</h2>
                 <p>{p.teaser}</p>

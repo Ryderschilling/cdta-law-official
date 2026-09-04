@@ -142,8 +142,38 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 .img-reveal::after{content:'';position:absolute;inset:0;background:var(--ink);transform:translateY(0);transition:transform 1.2s var(--ease)}
 .img-reveal.in>img,.img-reveal.in>.ph{transform:scale(1)}
 .img-reveal.in::after{transform:translateY(-101%)}
+/* ---------- grid tiles ----------
+   Tile grids get their own reveal, separate from .reveal. Tiles move a short
+   distance and settle quickly, so a row reads as one movement instead of four
+   cards sliding past each other at different speeds.
+   The stagger runs left to right across each row and keys off an explicit
+   column count, because index arithmetic in JSX (i % 3) is only ever correct
+   at one breakpoint and scrambles the order at every other one. */
+.tile{
+  opacity:0;
+  transform:translate3d(0,20px,0);
+  transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+  will-change:opacity,transform;
+  backface-visibility:hidden;
+}
+.tile.in{opacity:1;transform:translate3d(0,0,0)}
+/* two across between the phone and desktop breakpoints */
+@media(min-width:761px) and (max-width:1180px){
+  .tile:nth-child(2n+2){transition-delay:.07s}
+}
+/* desktop: whatever column count the grid actually declares */
+@media(min-width:1181px){
+  .cols-2 > .tile:nth-child(2n+2){transition-delay:.07s}
+  .cols-3 > .tile:nth-child(3n+2){transition-delay:.07s}
+  .cols-3 > .tile:nth-child(3n+3){transition-delay:.14s}
+  .cols-4 > .tile:nth-child(4n+2){transition-delay:.05s}
+  .cols-4 > .tile:nth-child(4n+3){transition-delay:.10s}
+  .cols-4 > .tile:nth-child(4n+4){transition-delay:.15s}
+}
+/* one across on a phone: every tile is its own row, so a delay only feels slow */
+
 @media(prefers-reduced-motion:reduce){
-  .reveal,.reveal-left,.reveal-right{transition:none!important;opacity:1!important;transform:none!important}
+  .reveal,.reveal-left,.reveal-right,.tile{transition:none!important;transition-delay:0s!important;opacity:1!important;transform:none!important}
   .img-reveal::after{display:none}
   .img-reveal>img,.img-reveal>.ph{transform:none!important}
   html{scroll-behavior:auto}
@@ -259,9 +289,14 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 .light-head p{max-width:46ch;color:var(--dim-dark);font-size:16px;line-height:1.8}
 
 /* ---------- card grid ---------- */
-.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair-dark)}
+/* Hairlines live on the tiles, not on the grid's own background. Ten tiles in a
+   three-wide grid leaves two empty cells in the last row, and a coloured grid
+   background paints those cells as a solid block. Borders on the tiles mean an
+   empty cell is simply empty. */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid var(--hair-dark);border-left:1px solid var(--hair-dark)}
 .card-grid.two{grid-template-columns:repeat(2,1fr)}
-.card{background:var(--paper);padding:48px 38px 42px;position:relative;overflow:hidden;transition:background .5s var(--ease);display:flex;flex-direction:column}
+.card{background:var(--paper);border-right:1px solid var(--hair-dark);border-bottom:1px solid var(--hair-dark);padding:48px 38px 42px;position:relative;overflow:hidden;transition:background .5s var(--ease);display:flex;flex-direction:column}
 .card::before{content:'';position:absolute;left:0;top:0;width:100%;height:3px;background:var(--gold-dark);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
 .card:hover::before,.card:focus-within::before{transform:scaleX(1)}
 .card:hover,.card:focus-within{background:#fff}
@@ -278,10 +313,11 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 .card a.card-cover span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 
 /* ---------- dark card grid ---------- */
-.dark-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);margin-top:64px}
+.dark-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:64px;
+  border-top:1px solid var(--hair);border-left:1px solid var(--hair)}
 .dark-grid.two{grid-template-columns:repeat(2,1fr)}
 .dark-grid.four{grid-template-columns:repeat(4,1fr)}
-.dcard{background:var(--ink);padding:40px 34px;position:relative;transition:background .45s var(--ease);display:flex;flex-direction:column}
+.dcard{background:var(--ink);border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:40px 34px;position:relative;transition:background .45s var(--ease);display:flex;flex-direction:column}
 .dcard:hover,.dcard:focus-within{background:var(--ink-3)}
 .dcard .idx{font-family:var(--cond);font-size:12px;letter-spacing:.2em;color:var(--gold);margin-bottom:22px}
 .dcard h3{font-size:23px;margin-bottom:12px}
@@ -406,8 +442,9 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 .side-links a[aria-current="page"]{color:var(--paper);font-weight:500}
 
 /* ---------- faculty ---------- */
-.fac-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);margin-top:64px}
-.fac-card{background:var(--ink);position:relative;transition:background .45s var(--ease);display:flex;flex-direction:column}
+.fac-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:64px;
+  border-top:1px solid var(--hair);border-left:1px solid var(--hair)}
+.fac-card{background:var(--ink);border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);position:relative;transition:background .45s var(--ease);display:flex;flex-direction:column}
 .fac-card:hover,.fac-card:focus-within{background:var(--ink-3)}
 .fac-img{aspect-ratio:4/3;overflow:hidden;background:var(--ink-2)}
 .fac-body{padding:32px 30px 34px;display:flex;flex-direction:column;flex:1}
@@ -464,8 +501,9 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 .map-embed iframe{display:block;width:100%;height:320px;border:0}
 
 /* ---------- blog ---------- */
-.post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);margin-top:64px}
-.post-card{background:var(--ink);padding:38px 32px 34px;position:relative;display:flex;flex-direction:column;transition:background .45s var(--ease)}
+.post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:64px;
+  border-top:1px solid var(--hair);border-left:1px solid var(--hair)}
+.post-card{background:var(--ink);border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:38px 32px 34px;position:relative;display:flex;flex-direction:column;transition:background .45s var(--ease)}
 .post-card:hover,.post-card:focus-within{background:var(--ink-3)}
 .post-date{font-family:var(--cond);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 .post-card h3{font-size:23px;line-height:1.24}
@@ -543,7 +581,7 @@ footer{background:var(--ink);border-top:1px solid var(--gold-line-soft);padding:
   .side-col{position:static;height:auto;display:block;padding:0}
   .side-card{position:static}
   .form-grid{grid-template-columns:1fr;gap:56px}
-  .fac-grid,.post-grid,.dark-grid,.card-grid{grid-template-columns:repeat(2,1fr)}
+  .fac-grid,.post-grid,.dark-grid,.dark-grid.four,.card-grid{grid-template-columns:repeat(2,1fr)}
   .dark-grid.four{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:1024px){

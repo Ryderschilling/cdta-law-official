@@ -28,14 +28,25 @@ export default function ScrollFX() {
 
     const observers = [];
 
-    // reveal on scroll
-    // .img-reveal MUST be in this list. Its ::after overlay is a solid ink
-    // panel that only slides away on .in, so leaving it unobserved renders
-    // every image slot on the site as an empty box. This shipped that way once.
-    const els = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.img-reveal');
-    if (reduce || !supportsIO) {
-      els.forEach((el) => el.classList.add('in'));
-    } else {
+    // Reveal on scroll, in two groups with different trigger points.
+    //  - sections wait until a decent slice is on screen
+    //  - grid tiles fire as the row appears, so a row animates as one wave
+    //    rather than each card popping when it individually clears 15%
+    //
+    // EVERY selector whose CSS depends on .in must be listed here. A class left
+    // out is invisible on the page forever: .img-reveal shipped that way once
+    // and rendered every image slot on the site as an empty box.
+    const groups = [
+      ['.reveal,.reveal-left,.reveal-right,.img-reveal', { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }],
+      ['.tile', { threshold: 0.02, rootMargin: '0px 0px -40px 0px' }]
+    ];
+    for (const [selector, opts] of groups) {
+      const els = document.querySelectorAll(selector);
+      if (!els.length) continue;
+      if (reduce || !supportsIO) {
+        els.forEach((el) => el.classList.add('in'));
+        continue;
+      }
       const io = new IntersectionObserver(
         (entries) =>
           entries.forEach((e) => {
@@ -44,7 +55,7 @@ export default function ScrollFX() {
               io.unobserve(e.target);
             }
           }),
-        { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+        opts
       );
       els.forEach((el) => {
         // Anything already on screen at route change reveals immediately, so a

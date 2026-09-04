@@ -125,9 +125,9 @@ export default function About() {
               here is covered by tuition rather than billed separately.
             </p>
           </div>
-          <ol className="card-grid" style={{ listStyle: 'none' }}>
-            {tenReasons.map(([n, h, p], i) => (
-              <li className={`card reveal${i % 3 ? ` d${i % 3}` : ''}`} key={n}>
+          <ol className="card-grid cols-3" style={{ listStyle: 'none' }}>
+            {tenReasons.map(([n, h, p]) => (
+              <li className="card tile" key={n}>
                 <span className="idx">( {n} )</span>
                 <h3>{h}</h3>
                 <p>{p}</p>

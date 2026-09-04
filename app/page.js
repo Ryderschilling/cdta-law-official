@@ -186,9 +186,9 @@ export default function Home() {
               for an examination, or already practicing, CDTA meets you where you are.
             </p>
           </div>
-          <div className="card-grid two">
-            {programs.map((p, i) => (
-              <div className={`card reveal${i ? ` d${Math.min(i, 4)}` : ''}`} key={p.slug}>
+          <div className="card-grid two cols-2">
+            {programs.map((p) => (
+              <div className="card tile" key={p.slug}>
                 <span className="idx">( {p.num} )</span>
                 <h3>{p.name}</h3>
                 <p>{p.teaser}</p>

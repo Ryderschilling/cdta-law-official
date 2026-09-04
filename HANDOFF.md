@@ -254,6 +254,31 @@ Two things had to be true for any of this to work:
 Checked for regressions: the 100svh column does not inflate any grid row. The
 shortest prose column on the site is 1104px, comfortably taller.
 
+**3d. Tile grids reveal as a wave and never paint their empty cells.** Every card
+grid on the site (ten reasons, programs, faculty, blog, MCLE subjects) uses a
+shared `.tile` reveal: a 20px lift over 600ms, staggered left to right across each
+row. Checked at three widths on six grids:
+
+```
+1440px   3 cols: delays 0 / .07 / .14s     2 cols: 0 / .07s
+1100px   all grids 2 cols: 0 / .07s
+700px    all grids 1 col: no delay, every tile is its own row
+```
+
+Two things worth knowing:
+
+- **The stagger is CSS, keyed off an explicit `cols-2` / `cols-3` class on the
+  grid.** It used to be index arithmetic in JSX (`i % 3`), which is only correct at
+  one breakpoint: at two columns the wave order came out 0, 1, 2, 0, 1, 2 across
+  rows of two and looked random. Change a grid's column count in CSS and you must
+  change its `cols-*` class to match.
+- **Hairlines are borders on the tiles, not a coloured grid background.** Ten tiles
+  in a three-wide grid leaves two empty cells in the last row, and a grid that
+  paints its own background renders those as a solid grey block. `/about`,
+  `/faculty` and `/mcle` all shipped with that block. Empty cells now show the
+  section behind them; the test asserts every grid's `background-color` is
+  transparent.
+
 **4. Headings and images.** One `<h1>` per page on all 41 HTML routes, no
 heading-level jumps, every `<img>` and `role="img"` carries alt text or an
 `aria-label`, every iframe has a title, every link and button has an accessible
