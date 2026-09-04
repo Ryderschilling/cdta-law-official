@@ -69,8 +69,8 @@ export default function About() {
                 must be at least eighteen and achieve an appropriate LSAT score.
               </p>
               <p>
-                Classes meet {classSchedule.evenings.toLowerCase()}, and{' '}
-                {classSchedule.saturday.toLowerCase()}. That schedule exists so that people with
+                Classes meet {classSchedule.evenings} Saturday classes run{' '}
+                {classSchedule.saturday.replace('Saturday, ', '')} That schedule exists so that people with
                 jobs, families and existing careers can do this without abandoning any of it.
                 Students living fifty miles or more from the Indio campus may complete most of
                 their studies through the{' '}
@@ -92,7 +92,7 @@ export default function About() {
               <Disclosure />
             </div>
 
-            <div>
+            <div className="side-col">
               <aside className="side-card">
                 <div className="sc-label">At a Glance</div>
                 <h3>{school.shortName}</h3>

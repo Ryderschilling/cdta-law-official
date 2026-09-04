@@ -88,7 +88,7 @@ export default async function Program({ params }) {
                 ))}
               </ul>
             </div>
-            <div><SideCard activeSlug={p.slug} /></div>
+            <div className="side-col"><SideCard activeSlug={p.slug} /></div>
           </div>
         </div>
       </section>

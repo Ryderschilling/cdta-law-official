@@ -84,7 +84,7 @@ export default function Tuition() {
               <Disclosure />
             </div>
 
-            <div>
+            <div className="side-col">
               <aside className="side-card">
                 <div className="sc-label">Tuition</div>
                 <h3>{tuition.annual} per year</h3>

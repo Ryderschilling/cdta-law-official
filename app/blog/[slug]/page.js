@@ -82,7 +82,7 @@ export default async function Post({ params }) {
                 ))}
               </ul>
             </div>
-            <div>
+            <div className="side-col">
               <SideCard
                 heading="Thinking about applying?"
                 copy="Evening and Saturday classes, four admission paths, and a Registrar who will tell you straight whether you qualify."

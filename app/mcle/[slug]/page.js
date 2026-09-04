@@ -98,7 +98,7 @@ export default async function McleSubject({ params }) {
                 ))}
               </ul>
             </div>
-            <div>
+            <div className="side-col">
               <SideCard
                 activeSlug={m.slug}
                 links="mcle"

@@ -74,8 +74,8 @@ export default function Admissions() {
 
               <h2>What you are signing up for</h2>
               <p>
-                A four-year course of study. Classes {classSchedule.evenings.toLowerCase()}, and{' '}
-                {classSchedule.saturday.toLowerCase()}. Instruction in a working courtroom, and
+                A four-year course of study. Classes meet {classSchedule.evenings} Saturday
+                classes run {classSchedule.saturday.replace('Saturday, ', '')} Instruction in a working courtroom, and
                 the First-Year Law Students&rsquo; Examination after the first year.
               </p>
               <p>
@@ -93,7 +93,7 @@ export default function Admissions() {
               <Faq items={FAQ} />
             </div>
 
-            <div>
+            <div className="side-col">
               <aside className="side-card">
                 <div className="sc-label">Admissions Office</div>
                 <h3>Talk to the Registrar.</h3>

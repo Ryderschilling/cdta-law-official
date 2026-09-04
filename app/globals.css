@@ -359,7 +359,40 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 .disclosure.on-light a{color:var(--gold-dark);border-color:rgba(122,96,41,.5)}
 
 /* ---------- sticky sidebar ---------- */
-.side-card{position:sticky;top:118px;background:var(--ink-2);border:1px solid var(--gold-line);padding:38px 34px}
+/* --- sticky sidebar ------------------------------------------------
+   The WRAPPER is the grid item, so the wrapper is what has to be
+   sticky. A child can only travel inside its parent's box, and with
+   .prose-grid{align-items:start} that parent is exactly as tall as the
+   card, which is 0px of travel: the reason this sidebar never stuck.
+
+   Making the wrapper a viewport-height sticky flex box centres the card
+   vertically AND keeps it bounded by its own column, so it can never
+   spill into the next section. justify-content:safe center falls back
+   to flex-start when the card is taller than the viewport, so nothing
+   ever hides underneath the fixed nav on a short screen.
+   ------------------------------------------------------------------ */
+.side-col{
+  position:sticky;
+  top:0;
+  height:100svh;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  /* safe center: centres the card, but falls back to flex-start the moment
+     the card is taller than the space, instead of overflowing both edges. */
+  justify-content:safe center;
+  /* clears the condensed nav at the top, breathes at the bottom */
+  padding:88px 0 28px;
+  /* A card taller than the viewport must never be trapped with its button
+     below the fold and no way to reach it. This lets the column scroll it,
+     with the bar hidden so it stays invisible in the normal case where the
+     card fits and nothing scrolls at all. */
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:none;
+}
+.side-col::-webkit-scrollbar{display:none}
+.side-card{position:static;width:100%;background:var(--ink-2);border:1px solid var(--gold-line);padding:38px 34px}
 .side-card .sc-label{font-family:var(--cond);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
 .side-card h3{font-size:25px;margin-top:12px}
 .side-card p{color:var(--dim);font-size:14.5px;line-height:1.8;margin-top:14px}
@@ -507,6 +540,7 @@ footer{background:var(--ink);border-top:1px solid var(--gold-line-soft);padding:
    ============================================================ */
 @media(max-width:1180px){
   .prose-grid{grid-template-columns:1fr;gap:64px}
+  .side-col{position:static;height:auto;display:block;padding:0}
   .side-card{position:static}
   .form-grid{grid-template-columns:1fr;gap:56px}
   .fac-grid,.post-grid,.dark-grid,.card-grid{grid-template-columns:repeat(2,1fr)}

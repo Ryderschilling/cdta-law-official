@@ -275,8 +275,10 @@ export const courtrooms = [
   { n: '03', h: 'A Federal Courtroom', p: 'An operational federal courtroom on the same campus, so federal practice is not an abstraction.' }
 ];
 
+// Complete sentences: these are dropped straight into body copy, so they must
+// not be lowercased (they carry weekday names) or have a full stop appended.
 export const classSchedule = {
-  evenings: 'Tuesday, Wednesday and Thursday, 6:00 p.m. to 9:30 p.m.',
+  evenings: 'Tuesday, Wednesday and Thursday evenings, 6:00 p.m. to 9:30 p.m.',
   saturday: 'Saturday, 8:30 a.m. to 3:00 p.m.'
 };
 

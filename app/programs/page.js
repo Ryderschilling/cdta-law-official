@@ -38,8 +38,8 @@ export default function Programs() {
           <div className="prose-body" style={{ marginTop: 64 }}>
             <h2>How the schedule works</h2>
             <p>
-              Classes meet {classSchedule.evenings.toLowerCase()}, and{' '}
-              {classSchedule.saturday.toLowerCase()}. The J.D. is a four-year course of study.
+              Classes meet {classSchedule.evenings} Saturday classes run{' '}
+              {classSchedule.saturday.replace('Saturday, ', '')} The J.D. is a four-year course of study.
             </p>
             <p>
               That timetable is the reason a large share of CDTA students are working adults and

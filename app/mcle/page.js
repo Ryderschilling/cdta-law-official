@@ -82,7 +82,7 @@ export default function Mcle() {
 
               <McleDisclosure />
             </div>
-            <div>
+            <div className="side-col">
               <aside className="side-card">
                 <div className="sc-label">MCLE Inquiries</div>
                 <h3>Ask for the current schedule.</h3>

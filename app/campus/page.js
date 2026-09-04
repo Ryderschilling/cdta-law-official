@@ -55,10 +55,10 @@ export default function Campus() {
             <div className="prose-body">
               <h2>When classes meet</h2>
               <p>
-                <strong>Evenings.</strong> {classSchedule.evenings}.
+                <strong>Evenings.</strong> {classSchedule.evenings}
               </p>
               <p>
-                <strong>Saturdays.</strong> {classSchedule.saturday}. Saturday is also when the{' '}
+                <strong>Saturdays.</strong> {classSchedule.saturday} Saturday is also when the{' '}
                 <Link className="inline" href="/programs/saturday-enrichment">Saturday Enrichment Program</Link>{' '}
                 and the weekly Barrister luncheon run.
               </p>
@@ -96,7 +96,7 @@ export default function Campus() {
                 />
               </div>
             </div>
-            <div>
+            <div className="side-col">
               <aside className="side-card">
                 <div className="sc-label">Visit the Academy</div>
                 <h3>{school.street}<br />{school.city}, {school.state} {school.zip}</h3>

@@ -224,6 +224,36 @@ the `ScrollFX` selector list, which left the overlay in place forever and render
 every image slot on the site as an empty box. Do not remove `.img-reveal` from
 that `querySelectorAll` call.
 
+**3c. The sidebar parks centred and never traps its own button.** The "at a
+glance" card is sticky. A headless pass scrolls each sidebar page at six viewport
+heights and measures where the card sits on every step:
+
+```
+1440 x 1200 / 1050 / 900   every page: centre 52-53%, drift 0%, fully visible
+1440 x 820                 all but /mcle/legal-ethics centred; that one is taller
+                           than the viewport, so its column scrolls instead
+1440 x 760 / 700           short cards still centre; tall ones stay reachable
+```
+
+The card is centred whenever it fits and, when it does not, the column scrolls so
+the Apply button can always be reached. It never sits underneath the fixed nav.
+
+Two things had to be true for any of this to work:
+
+- **The sticky element must be the grid item, not the card.** `.prose-grid` uses
+  `align-items:start`, which makes each column exactly as tall as its content. A
+  sticky card inside a column that is its own height has **0px of travel**, which
+  is why this sidebar never stuck on any of the eight pages that use it.
+  `.side-col` is now the sticky item and the card sits inside it.
+- **`justify-content: safe center` rather than `center`.** Plain `center` overflows
+  a too-tall card equally off both ends and hides the top under the nav with no way
+  to scroll to it. `safe` falls back to flex-start the moment the content does not
+  fit. Paired with `overflow-y:auto` on the column (scrollbar hidden), a tall card
+  stays fully reachable.
+
+Checked for regressions: the 100svh column does not inflate any grid row. The
+shortest prose column on the site is 1104px, comfortably taller.
+
 **4. Headings and images.** One `<h1>` per page on all 41 HTML routes, no
 heading-level jumps, every `<img>` and `role="img"` carries alt text or an
 `aria-label`, every iframe has a title, every link and button has an accessible
