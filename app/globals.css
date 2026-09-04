@@ -1,9 +1,10 @@
 /* ============================================================
-   TEMPORARY IMAGERY: the background photos referenced below are
-   stock placeholders. Per the engagement, the client supplies
-   photography. Replace with real photographs of the Indio campus
-   and the three courtrooms before launch, and move them to
-   /public/img/ so they are self-hosted (better LCP).
+   TEMPORARY IMAGERY: everything in /public/img/ is licensed stock,
+   self-hosted, standing in until the Academy supplies its own
+   photography. Nothing is hotlinked. Replace the files in place and
+   the whole site updates. Alt text throughout is deliberately
+   generic: no image claims to be a CDTA room, building or person.
+   Faculty portraits are marked placeholders, not stock strangers.
    ============================================================ */
 
 /* ============================================================
@@ -150,15 +151,25 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 }
 
 /* ---------- image placeholders (client owes real photography) ---------- */
-.ph{width:100%;height:100%;background:linear-gradient(135deg,var(--ink-3),var(--ink-2));
-  display:flex;align-items:flex-end;padding:18px;position:relative}
+.ph{width:100%;height:100%;background:
+    radial-gradient(ellipse at 50% 38%,rgba(200,164,92,.09),transparent 62%),
+    linear-gradient(135deg,var(--ink-3),var(--ink-2));
+  display:flex;align-items:flex-end;padding:18px;position:relative;overflow:hidden}
 .ph::before{content:'';position:absolute;inset:14px;border:1px solid var(--gold-line)}
 .ph span{position:relative;font-family:var(--cond);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+/* Faculty portraits: a branded monogram, not an empty box. The Academy
+   supplies real headshots; nothing here is a stock photo of a stranger. */
+.ph-mono{align-items:center;justify-content:center;flex-direction:column;gap:14px;text-align:center;padding:24px}
+.ph-initials{position:relative;font-family:var(--serif);font-weight:400;font-size:clamp(38px,4.4vw,58px);
+  line-height:1;color:var(--gold);letter-spacing:.04em;
+  width:1.9em;height:1.9em;border:1px solid var(--gold-line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center}
+.ph-mono span{max-width:22ch;line-height:1.7}
 
 /* ---------- home hero ---------- */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
 .hero-bg{position:absolute;inset:-12% 0;z-index:0;will-change:transform;
-  background:url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2400&auto=format&fit=crop') center/cover;
+  background:url('/img/hero.webp') center/cover;
   filter:brightness(.34) saturate(.8) contrast(1.05)}
 .hero-bg::after{content:'';position:absolute;inset:0;background:
   radial-gradient(ellipse at 30% 60%, rgba(12,15,20,.2), rgba(12,15,20,.9) 90%),
@@ -227,7 +238,9 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 .img-stack{position:relative;height:640px}
 .img-stack .img-a{position:absolute;top:0;left:0;width:76%;height:78%;z-index:1}
 .img-stack .img-b{position:absolute;bottom:0;right:0;width:52%;height:44%;z-index:2;box-shadow:0 40px 90px -30px rgba(0,0,0,.8)}
-.img-stack .float-tag{position:absolute;top:7%;right:1%;z-index:3;background:rgba(12,15,20,.88);backdrop-filter:blur(10px);border:1px solid var(--gold-line);
+/* right:24% lines the tag's right edge up with img-a (width:76%), so it sits
+   fully on the photograph instead of straddling its edge. */
+.img-stack .float-tag{position:absolute;top:7%;right:calc(24% + 18px);z-index:3;background:rgba(12,15,20,.88);backdrop-filter:blur(10px);border:1px solid var(--gold-line);
   padding:16px 20px;font-family:var(--cond);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 .num-list{margin-top:40px;display:flex;flex-direction:column}
 .num-item{display:flex;gap:24px;padding:28px 0;border-top:1px solid var(--hair);transition:padding-left .4s var(--ease)}
@@ -432,7 +445,7 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 /* ---------- big CTA ---------- */
 .cta{position:relative;padding:170px 0;overflow:hidden;text-align:center;background:var(--ink)}
 .cta-bg{position:absolute;inset:-14% 0;z-index:0;will-change:transform;
-  background:url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=2400&auto=format&fit=crop') center/cover;
+  background:url('/img/cta.webp') center/cover;
   filter:brightness(.28) saturate(.85)}
 .cta-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(12,15,20,.35),rgba(12,15,20,.94))}
 .cta-inner{position:relative;z-index:2;max-width:880px;margin:0 auto;padding:0 48px}
@@ -554,7 +567,7 @@ footer{background:var(--ink);border-top:1px solid var(--gold-line-soft);padding:
   .mission-img .frame{inset:-12px 12px 12px 0}
   .mission-img .badge{position:static;max-width:100%;margin-top:18px;padding:20px 22px}
   .img-stack{height:400px}
-  .img-stack .float-tag{right:0;font-size:10px;padding:12px 14px;letter-spacing:.16em}
+  .img-stack .float-tag{top:5%;right:auto;left:12px;font-size:10px;padding:11px 13px;letter-spacing:.14em}
   .num-item{gap:16px;padding:22px 0}
   .num-item:hover{padding-left:0}
   .num-item .n{min-width:30px;font-size:13px}

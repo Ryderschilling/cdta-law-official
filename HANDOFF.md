@@ -144,14 +144,35 @@ background through the ancestor chain, and computed the ratio.
 
 ## Photography
 
-**No stock photos of strangers standing in for real people.** Every image slot is
-a marked placeholder component that announces itself to screen readers as
-"Placeholder image: <what goes here>. Photography to be supplied by the Academy."
-Faculty pages say so in plain text on the page as well.
+Everything visual is now in place and nothing is hotlinked. Seven licensed stock
+images live in `/public/img/`, self-hosted as WebP, **532 KB for the whole set**:
 
-Three background photos are still hotlinked stock (hero, the big CTA band). They
-are marked at the top of `globals.css`. Replace them, move them to `/public/img/`,
-and the LCP improves at the same time.
+| file | where | size |
+| --- | --- | --- |
+| `hero.webp` | home hero background | 89 KB |
+| `cta.webp` | the big CTA band, every page | 156 KB |
+| `columns.webp` | home mission frame, campus stack | 111 KB |
+| `library.webp` | home courtroom stack, campus stack | 49 KB |
+| `busts.webp` | about page stack | 82 KB |
+| `books.webp` | home courtroom stack | 15 KB |
+| `desk.webp` | about page stack | 15 KB |
+
+Replace any file in place, keep the name, and the whole site updates. Every one is
+served from our own origin, so nothing breaks if a third-party image host goes
+away or is blocked on a visitor's network.
+
+**Two rules were kept, and they matter:**
+
+1. **No image claims to be a CDTA room, building or person.** Alt text is
+   deliberately generic ("A law library corridor lined floor to ceiling with bound
+   volumes", not "our trial courtroom"). The pages describe the real facilities in
+   text; the photographs are atmospheric. When the Academy sends real campus
+   photography, swap the files and tighten the alt text to match.
+2. **Faculty portraits are not stock photos of strangers.** They render as a
+   designed monogram: the professor's initials in the serif face inside a gold
+   ring, on the Academy's own gradient, with the name beneath. It reads as a
+   deliberate design choice rather than a missing image, and it stays honest.
+   Replace with real headshots and the monogram disappears.
 
 ## Verification, and what it output
 
@@ -184,6 +205,24 @@ Two things in the mockup would have broken this and were fixed before they could
 the giant outlined `Advocacy` word behind the story band is clipped by its
 section, and the side reveals go vertical below 1024px because a 40px horizontal
 offset is wider than a phone's page gutter.
+
+**3b. Scroll reveals actually fire.** Every `.img-reveal` element carries a solid
+ink `::after` panel that only slides away once the element gets `.in` from
+`ScrollFX`. A headless pass scrolls each image section into view, waits, and
+asserts the class landed, with no manual forcing anywhere in the script:
+
+```
+/            @1440   img-reveal on screen: 1, revealed: 1, still covered: 0
+/            @1440   img-reveal on screen: 2, revealed: 2, still covered: 0
+/            @390    img-reveal on screen: 1, revealed: 1, still covered: 0
+/campus      @1440   img-reveal on screen: 2, revealed: 2, still covered: 0
+/faculty     @1440   img-reveal on screen: 6, revealed: 6, still covered: 0
+```
+
+This test exists because the first build shipped with `.img-reveal` missing from
+the `ScrollFX` selector list, which left the overlay in place forever and rendered
+every image slot on the site as an empty box. Do not remove `.img-reveal` from
+that `querySelectorAll` call.
 
 **4. Headings and images.** One `<h1>` per page on all 41 HTML routes, no
 heading-level jumps, every `<img>` and `role="img"` carries alt text or an
@@ -293,7 +332,18 @@ its `sitemap.js` / `robots.js` metadata conventions. Because this lives under
 "Dave's projects", the sitemap is a route handler and robots is a static file.
 Do not convert them back.
 
-**`.next-STALE-DELETE-ME/`** is a leftover build directory that the session's
-file mount refuses to delete: it contains an empty `server 2` folder that reports
-"Directory not empty" to every removal attempt. It is a mount artifact, not a code
-problem, and it is gitignored. Delete it in Finder.
+**This project lives inside an iCloud-synced folder, and iCloud fights the build.**
+`~/Documents/Claude/...` is synced, so iCloud keeps making conflict copies of the
+build output: `.next/server 2`, `.next/dev 2` and similar. Those duplicates are
+undeletable through the sync layer and they make `next build` fail at the
+finalization step with `EPERM: operation not permitted, unlink`.
+
+It is a sync problem, not a code problem, and it will keep happening. Options, best
+first:
+
+1. Move the project out of the iCloud-synced tree, e.g. `~/Projects/cdta-law-site`.
+   Git is the backup; iCloud does not need to see `node_modules` or `.next` anyway.
+2. If it must stay put, `rm -rf .next` before each build, and when the delete
+   fails, `mv .next .next-old` and build again.
+
+Vercel builds from the git repo, so this never affects a deploy.

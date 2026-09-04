@@ -24,7 +24,7 @@ export default function Faculty() {
           <div className="fac-grid" style={{ marginTop: 0 }}>
             {faculty.map((f, i) => (
               <article className={`fac-card reveal${i % 3 ? ` d${i % 3}` : ''}`} key={f.slug}>
-                <div className="fac-img img-reveal"><Placeholder label={f.name} /></div>
+                <div className="fac-img img-reveal"><Placeholder label={f.name} initials={f.initials} /></div>
                 <div className="fac-body">
                   <div className="fac-role">{f.role}</div>
                   <h2 className="fac-name">{f.name}</h2>

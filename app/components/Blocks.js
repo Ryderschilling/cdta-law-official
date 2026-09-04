@@ -117,10 +117,44 @@ export function CTA({
   );
 }
 
-export function Placeholder({ label }) {
-  // Marked placeholder. The school owes real photography before launch.
+/* --------------------------------------------------------------
+   TEMPORARY PHOTOGRAPHY. These are licensed stock images standing in
+   until the Academy supplies its own. Alt text is deliberately
+   generic: no image on this site claims to be a CDTA room, a CDTA
+   building, or a CDTA person. Faculty portraits stay as marked
+   <Placeholder> until real headshots arrive. See HANDOFF.md.
+   -------------------------------------------------------------- */
+export function Photo({ src, alt, w, h, priority = false, cool = false }) {
   return (
-    <div className="ph" role="img" aria-label={`Placeholder image: ${label}. Photography to be supplied by the Academy.`}>
+    <img
+      src={src}
+      alt={alt}
+      width={w}
+      height={h}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding="async"
+      style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        // pulls a cool-toned source back toward the warm gold palette
+        filter: cool ? 'saturate(.5) sepia(.12) brightness(.92)' : 'saturate(.85)'
+      }}
+    />
+  );
+}
+
+export function Placeholder({ label, initials }) {
+  // Marked placeholder. The Academy owes real photography before launch.
+  // Deliberately designed rather than left blank: a stock photograph of a
+  // stranger must never stand in for a named member of this faculty.
+  return (
+    <div
+      className={`ph${initials ? ' ph-mono' : ''}`}
+      role="img"
+      aria-label={`Placeholder image: ${label}. Photography to be supplied by the Academy.`}
+    >
+      {initials && <b className="ph-initials" aria-hidden="true">{initials}</b>}
       <span>{label}</span>
     </div>
   );

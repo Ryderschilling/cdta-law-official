@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { PageHero, CTA, Placeholder } from '../components/Blocks';
+import { PageHero, CTA, Photo } from '../components/Blocks';
 import { school, addressLine, courtrooms, classSchedule, SERVICE_AREA } from '../lib/site';
 
 export const metadata = {
@@ -23,8 +23,14 @@ export default function Campus() {
         <div className="wrap">
           <div className="feature-grid">
             <div className="img-stack reveal-left">
-              <div className="img-a img-reveal"><Placeholder label="The trial courtroom" /></div>
-              <div className="img-b img-reveal d2"><Placeholder label="The campus exterior, Fargo Street" /></div>
+              <div className="img-a img-reveal">
+                <Photo src="/img/library.webp" w={1200} h={1100}
+                  alt="A law library corridor lined floor to ceiling with bound volumes" />
+              </div>
+              <div className="img-b img-reveal d2">
+                <Photo src="/img/columns.webp" w={1000} h={1300}
+                  alt="Stone columns and carved pediment of a courthouse" />
+              </div>
               <div className="float-tag reveal d3">{school.street} &middot; {school.city}</div>
             </div>
             <div>

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { PageHero, CTA, Placeholder, Disclosure } from '../components/Blocks';
+import { PageHero, CTA, Photo, Disclosure } from '../components/Blocks';
 import { school, outcomes, tenReasons, courtrooms, classSchedule } from '../lib/site';
 
 export const metadata = {
@@ -142,8 +142,14 @@ export default function About() {
         <div className="wrap">
           <div className="feature-grid">
             <div className="img-stack reveal-left">
-              <div className="img-a img-reveal"><Placeholder label="The appellate courtroom" /></div>
-              <div className="img-b img-reveal d2"><Placeholder label="The federal courtroom" /></div>
+              <div className="img-a img-reveal">
+                <Photo src="/img/busts.webp" w={1200} h={1100}
+                  alt="Marble busts standing along a gallery of law library shelving" />
+              </div>
+              <div className="img-b img-reveal d2">
+                <Photo src="/img/desk.webp" w={900} h={660} cool
+                  alt="A hand signing a document at a desk" />
+              </div>
             </div>
             <div>
               <div className="sec-label reveal"><div className="line" aria-hidden="true" /><span>Three Courtrooms</span></div>

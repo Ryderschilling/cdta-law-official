@@ -53,7 +53,7 @@ export default async function FacultyMember({ params }) {
         <div className="wrap">
           <div className="profile">
             <div>
-              <div className="profile-img img-reveal"><Placeholder label={f.name} /></div>
+              <div className="profile-img img-reveal"><Placeholder label={f.name} initials={f.initials} /></div>
               <h2 style={{ fontSize: 20, marginTop: 34 }}>Credentials</h2>
               <ul className="cred-list">
                 {f.credentials.map((c) => <li key={c}>{c}</li>)}

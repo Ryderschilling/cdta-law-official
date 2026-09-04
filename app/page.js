@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CTA, Placeholder } from './components/Blocks';
+import { CTA, Photo } from './components/Blocks';
 import {
   school, programs, outcomes, courtrooms, admissionPaths, UNACCREDITED_DISCLOSURE
 } from './lib/site';
@@ -81,7 +81,10 @@ export default function Home() {
             </div>
             <div className="mission-img reveal-right d2">
               <div className="frame" aria-hidden="true" />
-              <div className="img-reveal"><Placeholder label="The Indio campus" /></div>
+              <div className="img-reveal">
+                <Photo src="/img/columns.webp" w={1000} h={1300}
+                  alt="Stone columns and carved pediment of a courthouse against an overcast sky" />
+              </div>
               <div className="badge">
                 <span className="big">4</span>
                 A four-year course of study, built around the California bar-tested subjects.
@@ -126,8 +129,14 @@ export default function Home() {
         <div className="wrap">
           <div className="feature-grid">
             <div className="img-stack reveal-left">
-              <div className="img-a img-reveal"><Placeholder label="The trial courtroom" /></div>
-              <div className="img-b img-reveal d2"><Placeholder label="Students in argument" /></div>
+              <div className="img-a img-reveal">
+                <Photo src="/img/library.webp" w={1200} h={1100}
+                  alt="A law library corridor lined floor to ceiling with bound volumes" />
+              </div>
+              <div className="img-b img-reveal d2">
+                <Photo src="/img/books.webp" w={900} h={660}
+                  alt="Law books stacked beside an open notebook and pen" />
+              </div>
               <div className="float-tag reveal d3">{school.street} &middot; {school.city}</div>
             </div>
             <div>

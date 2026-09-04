@@ -29,7 +29,10 @@ export default function ScrollFX() {
     const observers = [];
 
     // reveal on scroll
-    const els = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+    // .img-reveal MUST be in this list. Its ::after overlay is a solid ink
+    // panel that only slides away on .in, so leaving it unobserved renders
+    // every image slot on the site as an empty box. This shipped that way once.
+    const els = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.img-reveal');
     if (reduce || !supportsIO) {
       els.forEach((el) => el.classList.add('in'));
     } else {
