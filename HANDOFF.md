@@ -386,6 +386,45 @@ fixed. `document.querySelector('.field .err')` inside the submit handler runs
 before React commits the error markup, finds nothing, and leaves focus where it
 was. Fixed here with a `useEffect` on `errors`. Port the same fix to Dolan.
 
+**9. Mobile navigation collapses.** The mobile menu had 22 links stacked flat,
+which ran roughly 1.6 screens tall on a 390px phone, so Contact and Required
+Disclosures sat below the fold with nothing on screen saying to scroll. It now
+renders 10 top-level rows, with Programs, MCLE for Attorneys and Admissions
+collapsed behind a chevron button.
+
+Two things make it safe rather than just shorter. The section label stays a real
+link to the section index, and the chevron is a separate 52x52 button next to it,
+so opening the children never costs you the parent page. And the collapsed
+children use `visibility:hidden` inside a `grid-template-rows:0fr` animation, not
+`height:0`, which is what actually takes them out of the tab order and the
+accessibility tree. Each toggle carries `aria-expanded`, `aria-controls` and a
+screen-reader-only name. The section you are currently in auto-expands when the
+menu opens.
+
+Measured at 390x844:
+
+```
+collapsed, /                    844px    fits one screen
+fully expanded                 1246px
+on /mcle/legal-ethics           970px    MCLE auto-expanded
+on /programs/juris-doctor       924px    Programs auto-expanded
+links reachable collapsed       11 of 22
+links reachable expanded        22 of 22
+toggles                         3, each 52x52px, each named
+targets under 44px              0
+```
+
+**Menu type was then sized down** from 26px to 22px serif (48px to 52px rows),
+and the in-menu CALL button from 14px to 13px at the same 0.1em tracking as the
+fixed call bar under it. The two gold buttons now read as the same object at two
+sizes instead of two competing ones. The whole menu fits one screen at 390px with
+room left, which it did not before.
+
+One thing left on the table: the in-menu CALL button duplicates the CALL button
+in the fixed bar at the bottom of every mobile screen. It is redundant. It was
+kept because a person who opens the menu looking for a way to get in touch should
+find one inside the menu, but removing it is defensible.
+
 ## Editorial decisions worth knowing
 
 **The blog was consolidated from 10 posts to 6.** The old Wix blog had two posts

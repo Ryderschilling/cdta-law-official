@@ -600,11 +600,35 @@ footer{background:var(--ink);border-top:1px solid var(--gold-line-soft);padding:
     overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
     transform:translateY(-100%);transition:transform .45s var(--ease),visibility .45s;visibility:hidden}
   .mobile-menu.open{transform:translateY(0);visibility:visible}
-  .mobile-menu a{display:flex;align-items:center;min-height:56px;font-family:var(--serif);font-size:26px;
-    padding:10px 0;border-bottom:1px solid var(--hair);color:var(--paper)}
-  .mobile-menu a.sub{font-family:var(--sans);font-size:15px;min-height:48px;padding:8px 0 8px 18px;color:var(--dim);letter-spacing:.02em}
-  .mobile-menu .mm-call{justify-content:center;margin-top:24px;border:1px solid var(--gold);background:var(--gold);color:var(--ink);
-    font-family:var(--cond);font-size:14px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;min-height:58px}
+  .mobile-menu a{display:flex;align-items:center;min-height:52px;font-family:var(--serif);font-size:22px;
+    padding:9px 0;border-bottom:1px solid var(--hair);color:var(--paper)}
+  .mobile-menu a.sub{font-family:var(--sans);font-size:14px;min-height:46px;padding:7px 0 7px 16px;color:var(--dim);letter-spacing:.02em}
+  .mobile-menu a[aria-current="page"]{color:var(--gold)}
+
+  /* Collapsible sections. The label is a link to the section index, the chevron
+     is a separate 44px control, so opening the children never costs you the
+     parent page. */
+  .mm-group{border-bottom:1px solid var(--hair)}
+  .mm-row{display:flex;align-items:center;gap:10px}
+  .mm-row > a{flex:1;min-width:0;border-bottom:none}
+  .mm-toggle{flex:0 0 auto;width:52px;min-height:52px;display:grid;place-items:center;
+    background:none;border:none;cursor:pointer;padding:0;color:var(--gold)}
+  .mm-chev{width:11px;height:11px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+    transform:translateY(-3px) rotate(45deg);transition:transform .35s var(--ease)}
+  .mm-toggle[aria-expanded="true"] .mm-chev{transform:translateY(2px) rotate(-135deg)}
+
+  /* 0fr to 1fr animates to the content's real height without hard-coding one.
+     visibility is what actually takes the collapsed links out of the tab order
+     and the accessibility tree, and it transitions, unlike display. */
+  .mm-sub{display:grid;grid-template-rows:0fr;visibility:hidden;
+    transition:grid-template-rows .35s var(--ease),visibility .35s var(--ease)}
+  .mm-sub[data-open="true"]{grid-template-rows:1fr;visibility:visible}
+  .mm-sub > div{overflow:hidden}
+  .mm-sub a.sub:last-child{border-bottom:none;padding-bottom:14px}
+  /* Sized to sit in the same family as the fixed call bar under it: same
+     condensed face, same 13px, so the two do not read as competing buttons. */
+  .mobile-menu .mm-call{justify-content:center;margin-top:22px;border:1px solid var(--gold);background:var(--gold);color:var(--ink);
+    font-family:var(--cond);font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;min-height:54px}
   .mission-grid,.feature-grid,.two-col{grid-template-columns:1fr;gap:56px}
   .sticky-col{position:static}
   .profile{grid-template-columns:1fr;gap:40px}
