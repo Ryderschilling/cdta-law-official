@@ -57,7 +57,8 @@ export default function Mcle() {
                 hour figures shown are the State Bar&rsquo;s, not CDTA&rsquo;s.
               </p>
 
-              <div className="dark-grid two cols-2" style={{ marginTop: 34 }}>
+              <div className="dark-grid two cols-2" style={{ marginTop: 34 }}
+                  role="group" tabIndex={0} aria-label="Required MCLE subject areas">
                 {mcleSubjects.map((m) => (
                   <article className="dcard tile" key={m.slug}>
                     <div className="idx">( {m.num} ) &nbsp;&middot;&nbsp; {m.hours} {m.hours === 1 ? 'hour' : 'hours'}</div>

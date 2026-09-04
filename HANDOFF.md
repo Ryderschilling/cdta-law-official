@@ -188,23 +188,34 @@ and robots is a static `public/robots.txt`. Do not convert them to the
 return 308 with the correct Location, including the catch-all `/post/:slug` to
 `/blog`. The 404 page returns 404 and still carries the required disclosure.
 
-**3. Zero horizontal overflow.** Headless Chromium, 26 routes at 320, 360, 390,
-414, 768 and 1024 px, asserting `document.documentElement.scrollWidth === clientWidth`:
+**3. Zero horizontal overflow, with the safety net removed.** `globals.css` sets
+`html,body{overflow-x:clip}` as a backstop. That forces
+`scrollWidth === clientWidth` to be true no matter how badly something overflows,
+so asserting it proves nothing: `widths.mjs` strips the backstop first, then
+measures. Run across all 41 routes:
 
 ```
-320px  all 26 routes fit
-360px  all 26 routes fit
-390px  all 26 routes fit
-414px  all 26 routes fit
-768px  all 26 routes fit
-1024px all 26 routes fit
-No horizontal overflow at any tested width.
+320px  all routes fit          768px   all routes fit
+360px  all routes fit          1024px  all routes fit
+390px  all routes fit
+414px  all routes fit
+Nothing overflows even with the overflow-x:clip safety net removed.
 ```
 
-Two things in the mockup would have broken this and were fixed before they could:
-the giant outlined `Advocacy` word behind the story band is clipped by its
-section, and the side reveals go vertical below 1024px because a 40px horizontal
-offset is wider than a phone's page gutter.
+The first honest run found two real blowouts the clip had been hiding:
+
+- **`/mcle` at 360 to 414px was 480px over.** `.prose-body` is a grid item, and
+  grid and flex items default to `min-width:auto`, which refuses to shrink below
+  their content's min-content width and drags the whole `1fr` track wider than the
+  screen. Fixed with `min-width:0` on `.prose-grid > *` and on the rail cards.
+- **Every route was 3px over at 320px.** The three footer social buttons need
+  301px side by side and could not shrink, pushing the footer past the viewport.
+  Fixed with `flex-wrap` on `.foot-social` and `min-width:0` on the footer columns.
+
+Two things in the mockup would also have broken this and were fixed earlier: the
+giant outlined `Advocacy` word behind the story band is clipped by its section,
+and the side reveals go vertical below 1024px because a 40px horizontal offset is
+wider than a phone's page gutter.
 
 **3b. Scroll reveals actually fire.** Every `.img-reveal` element carries a solid
 ink `::after` panel that only slides away once the element gets `.in` from
@@ -278,6 +289,34 @@ Two things worth knowing:
   `/faculty` and `/mcle` all shipped with that block. Empty cells now show the
   section behind them; the test asserts every grid's `background-color` is
   transparent.
+
+**3e. Card grids become swipeable rails on a phone.** Below 760px every tile grid
+turns into a horizontal, snap-scrolling rail: one card at a time with the next
+peeking, full bleed to the screen edges. A stack of four 420px cards was a 1,700px
+scroll for one section; a rail costs one screen. Checked on six rails at five
+widths:
+
+```
+320 / 360 / 390 / 414 / 760px, six grids each:
+  flex + overflow-x:auto, x-mandatory snap, swipes to the last card,
+  every card reveals, rail is full bleed, keyboard focusable,
+  page overflow while swiping: 0px at every step
+```
+
+Notes for changing it:
+
+- **The rail is the scroll container, never the page.** It is pulled out by the
+  page gutter and padded back in (`margin-inline: calc(var(--gutter) * -1)`),
+  which is why `--gutter` is a token rather than a literal 22px.
+- **`overscroll-behavior-x: contain`** stops a swipe past the last card from
+  triggering the browser's back gesture on iOS.
+- **`tabindex="0"` plus a name on each rail is not optional.** A scroll region
+  that is not focusable cannot be reached by keyboard, so everything past the
+  first card would be unreachable. The ten-reasons rail is an `<ol>` and keeps
+  list semantics with a plain `aria-label`; the others take `role="group"`.
+- **Body copy is line-clamped in a rail** so a card fits on screen. Tallest is now
+  the faculty card at 556px against an 844px viewport. Without the clamp it was
+  over 1,100px and swiping stopped being the interaction.
 
 **4. Headings and images.** One `<h1>` per page on all 41 HTML routes, no
 heading-level jumps, every `<img>` and `role="img"` carries alt text or an

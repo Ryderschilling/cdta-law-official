@@ -21,7 +21,8 @@ export default function Blog() {
 
       <section className="prose">
         <div className="wrap">
-          <div className="post-grid cols-3" style={{ marginTop: 0 }}>
+          <div className="post-grid cols-3" style={{ marginTop: 0 }}
+              role="group" tabIndex={0} aria-label="Blog posts">
             {posts.map((p) => (
               <article className="post-card tile" key={p.slug}>
                 <div className="post-date">{p.dateLabel}</div>

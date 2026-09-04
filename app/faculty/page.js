@@ -21,7 +21,8 @@ export default function Faculty() {
 
       <section className="prose" style={{ paddingBottom: 40 }}>
         <div className="wrap">
-          <div className="fac-grid cols-3" style={{ marginTop: 0 }}>
+          <div className="fac-grid cols-3" style={{ marginTop: 0 }}
+              role="group" tabIndex={0} aria-label="Faculty">
             {faculty.map((f) => (
               <article className="fac-card tile" key={f.slug}>
                 <div className="fac-img img-reveal"><Placeholder label={f.name} initials={f.initials} /></div>

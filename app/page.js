@@ -186,7 +186,7 @@ export default function Home() {
               for an examination, or already practicing, CDTA meets you where you are.
             </p>
           </div>
-          <div className="card-grid two cols-2">
+          <div className="card-grid two cols-2" role="group" tabIndex={0} aria-label="Programs of study">
             {programs.map((p) => (
               <div className="card tile" key={p.slug}>
                 <span className="idx">( {p.num} )</span>

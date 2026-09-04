@@ -359,6 +359,11 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 /* ---------- prose (interior body copy) ---------- */
 .prose{padding:100px 0 120px;background:var(--ink)}
 .prose-grid{display:grid;grid-template-columns:1fr 360px;gap:80px;align-items:start}
+/* Grid and flex items default to min-width:auto, which refuses to shrink below
+   their content's min-content width and silently pushes the track wider than the
+   viewport. overflow-x:clip on <body> then hides the damage. Both need min-width:0. */
+.prose-grid > *{min-width:0}
+.prose-body{min-width:0}
 .prose-body h2{font-size:clamp(28px,3.1vw,42px);margin-top:60px}
 .prose-body h2:first-child{margin-top:0}
 .prose-body h3{font-size:clamp(20px,2vw,26px);margin-top:42px}
@@ -529,9 +534,10 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 /* ---------- footer ---------- */
 footer{background:var(--ink);border-top:1px solid var(--gold-line-soft);padding:80px 0 40px}
 .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px}
+.foot-grid > *{min-width:0}
 .foot-brand .brand{margin-bottom:20px}
 .foot-brand p{font-size:13.5px;color:var(--dim);max-width:36ch;line-height:1.8}
-.foot-social{display:flex;gap:14px;margin-top:20px}
+.foot-social{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px}
 .foot-social a{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border:1px solid var(--hair);font-family:var(--cond);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding:0 12px;transition:border-color .3s,color .3s}
 .foot-social a:hover{border-color:var(--gold);color:var(--gold)}
 .foot-h{font-family:var(--cond);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;font-weight:500}
@@ -611,7 +617,8 @@ footer{background:var(--ink);border-top:1px solid var(--gold-line-soft);padding:
   .stat:nth-child(2)::after{display:none}
 }
 @media(max-width:760px){
-  .wrap,.wrap-narrow,.hero-inner,.story-inner,.cta-inner{padding-left:22px;padding-right:22px}
+  :root{--gutter:22px}
+  .wrap,.wrap-narrow,.hero-inner,.story-inner,.cta-inner{padding-left:var(--gutter);padding-right:var(--gutter)}
   .hero-inner{padding-top:124px;padding-bottom:86px}
   .hero-meta{display:none}
   h1{font-size:clamp(36px,9.4vw,58px)}
@@ -645,7 +652,63 @@ footer{background:var(--ink);border-top:1px solid var(--gold-line-soft);padding:
   .num-item .n{min-width:30px;font-size:13px}
   .num-item h3{font-size:21px}
 
-  .card-grid,.dark-grid,.dark-grid.four,.dark-grid.two,.card-grid.two,.fac-grid,.post-grid{grid-template-columns:1fr}
+  /* ---------- card rails ----------
+     On a phone a stack of four 420px cards is a 1,700px scroll for one section.
+     The tile grids become a horizontal rail instead: one card at a time with the
+     next one peeking, snapped, so a section costs one screen rather than four.
+     The rail is full bleed (pulled out by the page gutter and padded back in)
+     so it runs edge to edge and the last card clears the screen, and it scrolls
+     inside itself: the document never scrolls sideways.
+     tabindex on the container is what makes a scroll region keyboard operable;
+     without it a keyboard user cannot reach the cards past the first. */
+  .card-grid,.dark-grid,.dark-grid.four,.dark-grid.two,.card-grid.two,.fac-grid,.post-grid{
+    display:flex;
+    grid-template-columns:none;
+    gap:12px;
+    margin-inline:calc(var(--gutter) * -1);
+    padding-inline:var(--gutter);
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    scroll-padding-inline:var(--gutter);
+    overscroll-behavior-x:contain;      /* a swipe must not trigger browser back */
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    border:none;                        /* the grid frame does not apply to a rail */
+  }
+  .card-grid::-webkit-scrollbar,.dark-grid::-webkit-scrollbar,
+  .fac-grid::-webkit-scrollbar,.post-grid::-webkit-scrollbar{display:none}
+  .card-grid:focus-visible,.dark-grid:focus-visible,
+  .fac-grid:focus-visible,.post-grid:focus-visible{outline-offset:-3px}
+
+  /* Each card is a discrete bordered box in a rail, not a cell in a ruled grid.
+     78% leaves the next card visibly peeking, which is the whole affordance. */
+  .card-grid > .tile,.dark-grid > .tile,.fac-grid > .tile,.post-grid > .tile{
+    flex:0 0 78%;
+    min-width:0;                        /* flex default is min-width:auto */
+    scroll-snap-align:start;
+  }
+  .card-grid > .tile{border:1px solid var(--hair-dark)}
+  .dark-grid > .tile,.fac-grid > .tile,.post-grid > .tile{border:1px solid var(--hair)}
+
+  /* A rail card has to fit on the screen, or swiping is not the interaction any
+     more, scrolling is. Trim the body copy to a few lines and shorten the image;
+     the full text is one tap away on the page the card links to. */
+  .card-grid > .tile p,.dark-grid > .tile p,.post-grid > .tile p,.fac-grid > .tile .fac-teaser{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:5;
+    overflow:hidden;
+  }
+  .fac-grid > .tile .fac-teaser{-webkit-line-clamp:4}
+  .fac-grid > .tile .fac-img{aspect-ratio:3/2}
+  /* the link label is wider than a narrow card at full tracking, so it wrapped
+     and left the arrow stranded beside two lines */
+  .card-grid > .tile .card-link,.dark-grid > .tile .card-link,
+  .post-grid > .tile .card-link,.fac-grid > .tile .fac-more{
+    font-size:11px;
+    letter-spacing:.12em;
+  }
   .card{padding:34px 26px}
   .dcard,.post-card{padding:32px 24px}
   .fac-body{padding:26px 24px 30px}

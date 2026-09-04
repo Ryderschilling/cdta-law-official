@@ -125,7 +125,8 @@ export default function About() {
               here is covered by tuition rather than billed separately.
             </p>
           </div>
-          <ol className="card-grid cols-3" style={{ listStyle: 'none' }}>
+          <ol className="card-grid cols-3" style={{ listStyle: 'none' }}
+              tabIndex={0} aria-label="Ten reasons to attend CDTA">
             {tenReasons.map(([n, h, p]) => (
               <li className="card tile" key={n}>
                 <span className="idx">( {n} )</span>

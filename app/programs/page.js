@@ -21,7 +21,8 @@ export default function Programs() {
 
       <section className="prose" style={{ paddingBottom: 30 }}>
         <div className="wrap">
-          <div className="dark-grid two cols-2" style={{ marginTop: 0 }}>
+          <div className="dark-grid two cols-2" style={{ marginTop: 0 }}
+              role="group" tabIndex={0} aria-label="Programs of study">
             {programs.map((p) => (
               <article className="dcard tile" key={p.slug}>
                 <div className="idx">( {p.num} )</div>
