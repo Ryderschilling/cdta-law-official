@@ -312,15 +312,21 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,30px);lin
 .page-hero{position:relative;padding:190px 0 80px;background:var(--ink-2);border-bottom:1px solid var(--pur-line-soft);overflow:hidden}
 .page-hero::after{content:'';position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(ellipse at 12% 0%,rgba(168,136,221,.1),transparent 62%)}
-.page-hero.has-img{padding-top:210px;padding-bottom:100px}
+.page-hero.has-img{padding-top:215px;padding-bottom:115px;background:#0a0d12}
 .ph-img{position:absolute;inset:0;background-size:cover;background-position:center 42%;z-index:0}
 /* Two layers. The left-weighted wash keeps the h1 and the lede on a dark
    ground wherever the photograph is bright; the purple sits underneath so the
    picture belongs to this palette rather than being dropped into it. */
+/* The scrim is a PANEL, not a wash. It sits opaque behind the text column and
+   falls away to nothing across the middle of the frame, so the room is a
+   photograph on the right instead of a grey haze everywhere. Everything the
+   type needs is bought in the left 52%; do not flatten the whole image again
+   to buy it a second time. Contrast is checked against the RENDERED PIXELS
+   under the h1 and the lede, not against these values. */
 .ph-img::after{content:'';position:absolute;inset:0;background:
-  linear-gradient(90deg,rgba(12,15,20,.9) 0%,rgba(12,15,20,.76) 44%,rgba(12,15,20,.44) 78%,rgba(12,15,20,.6) 100%),
-  linear-gradient(180deg,rgba(12,15,20,.72) 0%,rgba(12,15,20,.35) 40%,rgba(12,15,20,.8) 100%),
-  linear-gradient(180deg,rgba(91,58,151,.3),transparent 65%)}
+  linear-gradient(95deg,rgba(10,13,18,.95) 0%,rgba(10,13,18,.93) 34%,rgba(10,13,18,.72) 52%,rgba(10,13,18,.2) 72%,transparent 88%),
+  linear-gradient(180deg,rgba(10,13,18,.62) 0%,transparent 30%,transparent 62%,rgba(10,13,18,.55) 100%),
+  linear-gradient(180deg,rgba(91,58,151,.16),transparent 55%)}
 .page-hero .wrap{position:relative;z-index:2}
 .page-hero h1{font-size:clamp(38px,5.4vw,76px);max-width:18ch}
 .page-hero .lede{margin-top:26px;max-width:660px;color:var(--dim);font-size:17px;line-height:1.8}
