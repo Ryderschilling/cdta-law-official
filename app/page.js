@@ -33,7 +33,7 @@ export default function Home() {
             courtroom, taught by practicing attorneys and sitting and retired judges.
           </p>
           <div className="hero-ctas reveal d3">
-            <Link href="/admissions/apply" className="btn btn-gold">
+            <Link href="/admissions/apply" className="btn btn-brand">
               Begin Your Application <span className="arr" aria-hidden="true">&rarr;</span>
             </Link>
             <Link href="/programs" className="btn btn-ghost">Explore Programs</Link>
@@ -234,7 +234,7 @@ export default function Home() {
       </section>
 
       {/* ---------------- ADMISSIONS ---------------- */}
-      <section className="mission" style={{ background: 'var(--ink-2)', borderTop: '1px solid var(--gold-line-soft)' }} id="admissions">
+      <section className="mission" style={{ background: 'var(--ink-2)', borderTop: '1px solid var(--pur-line-soft)' }} id="admissions">
         <div className="wrap">
           <div className="two-col">
             <div className="sticky-col">
@@ -245,7 +245,7 @@ export default function Home() {
                 one route in. It is not the only one.
               </p>
               <div className="hero-ctas reveal d3" style={{ marginTop: 32 }}>
-                <Link href="/admissions/apply" className="btn btn-gold">
+                <Link href="/admissions/apply" className="btn btn-brand">
                   Start Your Application <span className="arr" aria-hidden="true">&rarr;</span>
                 </Link>
               </div>
@@ -261,7 +261,7 @@ export default function Home() {
               <p style={{ marginTop: 26, fontSize: 14, color: 'var(--dim)', lineHeight: 1.85 }} className="reveal d4">
                 Admission also requires an appropriate LSAT score and completion of the CDTA
                 admissions application. See the full{' '}
-                <Link href="/admissions" style={{ color: 'var(--gold)', borderBottom: '1px solid var(--gold-line)' }}>admission requirements</Link>.
+                <Link href="/admissions" style={{ color: 'var(--pur)', borderBottom: '1px solid var(--pur-line)' }}>admission requirements</Link>.
               </p>
             </div>
           </div>

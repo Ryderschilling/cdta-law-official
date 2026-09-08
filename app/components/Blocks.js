@@ -76,7 +76,7 @@ export function SideCard({ activeSlug, heading, copy, links = 'programs' }) {
       <h3>{heading || 'Talk to the Registrar.'}</h3>
       <p>{copy || 'Speak with Irene Garcia Dolan about eligibility, transcripts and the next entering class. No admissions call center, no chase.'}</p>
       <a className="side-phone" href={`tel:${school.phoneRaw}`}>{school.phone}</a>
-      <Link className="btn btn-gold" href="/admissions/apply">Start Your Application</Link>
+      <Link className="btn btn-brand" href="/admissions/apply">Start Your Application</Link>
       <div className="side-links">
         <div className="sl-h">{links === 'mcle' ? 'Required Subjects' : 'Programs of Study'}</div>
         {list.map((p) => (
@@ -106,7 +106,7 @@ export function CTA({
         <h2 className="reveal d1">{heading}</h2>
         <p className="reveal d2">{copy}</p>
         <div className="reveal d3">
-          <Link href={ctaHref} className="btn btn-gold">{ctaText} <span className="arr" aria-hidden="true">&rarr;</span></Link>
+          <Link href={ctaHref} className="btn btn-brand">{ctaText} <span className="arr" aria-hidden="true">&rarr;</span></Link>
         </div>
         <p className="phone reveal d4">
           Or call the Academy, <a href={`tel:${school.phoneRaw}`}>{school.phone}</a>
@@ -137,8 +137,10 @@ export function Photo({ src, alt, w, h, priority = false, cool = false }) {
         width: '100%',
         height: '100%',
         objectFit: 'cover',
-        // pulls a cool-toned source back toward the warm gold palette
-        filter: cool ? 'saturate(.5) sepia(.12) brightness(.92)' : 'saturate(.85)'
+        // The sepia here used to warm sources toward the old gold palette.
+        // Against purple it read as mud, so the photography is simply pulled
+        // down and desaturated and the section overlays do the tinting.
+        filter: cool ? 'saturate(.42) brightness(.9) contrast(1.04)' : 'saturate(.8)'
       }}
     />
   );

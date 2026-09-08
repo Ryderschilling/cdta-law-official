@@ -92,7 +92,7 @@ export default function Mcle() {
                   number {school.mcleProviderNumber}.
                 </p>
                 <a className="side-phone" href={`tel:${school.phoneRaw}`}>{school.phone}</a>
-                <Link className="btn btn-gold" href="/contact">Request the MCLE Schedule</Link>
+                <Link className="btn btn-brand" href="/contact">Request the MCLE Schedule</Link>
                 <div className="side-links">
                   <div className="sl-h">Required Subjects</div>
                   {mcleSubjects.map((m) => (

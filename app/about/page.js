@@ -105,7 +105,7 @@ export default function About() {
                   <Link href="/required-disclosures">Required disclosures</Link>
                 </div>
                 <a className="side-phone" href={`tel:${school.phoneRaw}`}>{school.phone}</a>
-                <Link className="btn btn-gold" href="/admissions/apply">Start Your Application</Link>
+                <Link className="btn btn-brand" href="/admissions/apply">Start Your Application</Link>
               </aside>
             </div>
           </div>

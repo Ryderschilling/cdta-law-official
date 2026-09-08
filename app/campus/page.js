@@ -102,7 +102,7 @@ export default function Campus() {
                 <h3>{school.street}<br />{school.city}, {school.state} {school.zip}</h3>
                 <p>Downtown Indio, Riverside County. Ask for the Admissions Office.</p>
                 <a className="side-phone" href={`tel:${school.phoneRaw}`}>{school.phone}</a>
-                <Link className="btn btn-gold" href="/contact">Arrange a Visit</Link>
+                <Link className="btn btn-brand" href="/contact">Arrange a Visit</Link>
               </aside>
             </div>
           </div>

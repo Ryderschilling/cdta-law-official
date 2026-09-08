@@ -1,0 +1,21 @@
+
+/* --- student intake, curriculum, alumni: phones --- */
+@media(max-width:760px){
+  /* min-width:0 on every grid/flex item. Without it they default to
+     min-width:auto, refuse to shrink below content, and drag the track wider
+     than the screen. This is the blowout the clip backstop hides. */
+  .intake .opt,.intake-steps li,.alum-card,.curr-list li,.cc-head{min-width:0}
+  .intake-steps{margin-bottom:30px}
+  .intake-steps li{padding:12px 10px;font-size:10.5px;letter-spacing:.08em;justify-content:center}
+  .intake-steps li .t{display:none}
+  .intake-steps li.now .t{display:inline}
+  .intake-q{margin-top:28px}
+  .intake legend{font-size:16px}
+  .intake .opt{font-size:15px;padding:12px 15px}
+  .intake-actions{gap:12px;margin-top:34px}
+  .intake-actions .btn{flex:1 1 100%}
+  .intake-call{flex:1 1 100%;justify-content:center;border-bottom:none}
+  .cc-head{flex-direction:column;gap:6px}
+  .cc-head h3{font-size:20px}
+  .alum-card h3,.alum-year,.alum-practice,.alum-bio,.alum-admitted{padding:0 18px}
+}

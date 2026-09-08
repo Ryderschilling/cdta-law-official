@@ -90,7 +90,7 @@ export default function Tuition() {
                 <h3>{tuition.annual} per year</h3>
                 <p>{tuition.total} across the four-year course of study, with textbooks, research tools and bar preparation included.</p>
                 <a className="side-phone" href={`tel:${school.phoneRaw}`}>{school.phone}</a>
-                <Link className="btn btn-gold" href="/admissions/apply">Start Your Application</Link>
+                <Link className="btn btn-brand" href="/admissions/apply">Start Your Application</Link>
                 <div className="side-links">
                   <div className="sl-h">Admissions</div>
                   <Link href="/admissions">Requirements</Link>

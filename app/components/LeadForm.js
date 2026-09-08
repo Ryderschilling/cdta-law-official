@@ -189,7 +189,7 @@ export default function LeadForm() {
         {errors.consent && <div className="err" id="consent-err">{errors.consent}</div>}
       </div>
 
-      <button className="btn btn-gold" type="submit" disabled={busy}>
+      <button className="btn btn-brand" type="submit" disabled={busy}>
         {busy ? 'Sending...' : 'Send to Admissions'}
       </button>
 

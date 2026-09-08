@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { school, programs, mcleSubjects } from '../lib/site';
+import { hasCurriculum, hasAlumni } from '../lib/academics';
 
 // The three sections that have children. Everything else in the mobile menu is a
 // single link, so collapsing only these takes the menu from ~20 rows to 11.
@@ -80,6 +81,10 @@ export default function Nav() {
           <Link href="/about">The Academy</Link>
           <Link href="/programs">Programs</Link>
           <Link href="/faculty">Faculty</Link>
+          {/* Guarded routes. They 404 while empty, so they must not be linked
+              until app/lib/academics.js has data. Both appear on their own. */}
+          {hasCurriculum() && <Link href="/curriculum">Curriculum</Link>}
+          {hasAlumni() && <Link href="/alumni">Alumni</Link>}
           <Link href="/mcle">MCLE</Link>
           <Link href="/admissions">Admissions</Link>
           <Link href="/admissions/apply" className="nav-cta">Apply Now</Link>

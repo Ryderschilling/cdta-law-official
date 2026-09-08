@@ -102,7 +102,7 @@ export default function Admissions() {
                   Ask her directly rather than guessing from a website.
                 </p>
                 <a className="side-phone" href={`tel:${school.phoneRaw}`}>{school.phone}</a>
-                <Link className="btn btn-gold" href="/admissions/apply">Start Your Application</Link>
+                <Link className="btn btn-brand" href="/admissions/apply">Start Your Application</Link>
                 <div className="side-links">
                   <div className="sl-h">Admissions</div>
                   <Link href="/admissions" aria-current="page">Requirements</Link>

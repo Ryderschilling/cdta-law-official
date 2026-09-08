@@ -1,4 +1,5 @@
 import { school, programs, mcleSubjects, faculty } from '../lib/site';
+import { hasCurriculum, hasAlumni } from '../lib/academics';
 import { posts } from '../lib/posts';
 
 export const dynamic = 'force-static';
@@ -14,6 +15,10 @@ export function GET() {
     entry('/about', '0.9'),
     entry('/campus', '0.7'),
     entry('/faculty', '0.8'),
+    // These two are guarded routes: they 404 while their arrays are empty, so
+    // they must not appear in the sitemap until the Academy supplies the data.
+    ...(hasCurriculum() ? [entry('/curriculum', '0.8')] : []),
+    ...(hasAlumni() ? [entry('/alumni', '0.7')] : []),
     ...faculty.map((f) => entry(`/faculty/${f.slug}`, '0.6')),
     entry('/programs', '0.9'),
     ...programs.map((p) => entry(`/programs/${p.slug}`, '0.9')),

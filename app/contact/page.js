@@ -72,9 +72,9 @@ export default function Contact() {
 
               <p style={{ marginTop: 26, fontSize: 14, color: 'var(--dim)', lineHeight: 1.85 }}>
                 Applying? Start at{' '}
-                <Link href="/admissions/apply" style={{ color: 'var(--gold)', borderBottom: '1px solid var(--gold-line)' }}>Admissions</Link>.
+                <Link href="/admissions/apply" style={{ color: 'var(--pur)', borderBottom: '1px solid var(--pur-line)' }}>Admissions</Link>.
                 Practicing attorney after MCLE hours? Ask for the{' '}
-                <Link href="/mcle" style={{ color: 'var(--gold)', borderBottom: '1px solid var(--gold-line)' }}>MCLE schedule</Link>.
+                <Link href="/mcle" style={{ color: 'var(--pur)', borderBottom: '1px solid var(--pur-line)' }}>MCLE schedule</Link>.
               </p>
             </div>
           </div>
