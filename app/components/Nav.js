@@ -79,6 +79,7 @@ export default function Nav() {
 
         <div className="nav-links">
           <Link href="/about">The Academy</Link>
+          <Link href="/campus">Campus</Link>
           <Link href="/programs">Programs</Link>
           <Link href="/faculty">Faculty</Link>
           {/* Guarded routes. They 404 while empty, so they must not be linked
