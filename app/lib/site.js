@@ -548,6 +548,9 @@ export const additionalFaculty = [
 // organisation. Worth re-branding inside CloudPano before launch.
 // ============================================================
 export const virtualTour = {
-  url: null,
+  // Verified 2026-09-08: 200, and no X-Frame-Options or CSP frame-ancestors
+  // header, so it embeds. If CloudPano ever adds one, the section will go
+  // blank rather than error, so re-check this before blaming the CSS.
+  url: 'https://app.cloudpano.com/tours/HUbhNAqiWt',
   title: 'Walk the trial, appellate and federal courtrooms'
 };
