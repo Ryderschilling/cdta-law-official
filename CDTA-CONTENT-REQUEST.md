@@ -56,15 +56,30 @@ Students' Examination.** It carries the required note that the FYLSX is not the
 bar examination and that CDTA does not publish a General Bar Examination
 passage rate.
 
-**What is missing is the period that number covers.** A rate with no years
-attached is not a statistic, and it is the one thing that has never been
-supplied. Please send:
+**What is missing is the period that number covers, and the cohort size.**
 
-- The exact years the "Over 60%" figure covers
+This was checked against the State Bar on 2026-09-08. The State Bar's *2024
+California Accredited and Unaccredited Law School Performance Report* publishes
+FYLSX pass rates **by school type only, never by individual school**. So the
+"Over 60%" figure can only come from the Academy's own records; nobody outside
+can verify it, and the website is the only place it appears.
+
+The same report shows what the Academy is being compared against. For
+"Unaccredited: Fixed Facility" schools, FYLSX pass rates across 2022 to 2024
+ran **11% to 35%** depending on the administration. So the comparison claim on
+the current site holds comfortably if the 60% is accurate, but 60% is roughly
+double the best year in that category, which is exactly the kind of number a
+regulator or a careful applicant will want the details on.
+
+Please send:
+
+- The exact years or administrations the "Over 60%" figure covers
+- **How many students it is out of.** Five of eight passing is a real 62% and
+  is fine to publish with that context. Published without it, the same number
+  reads as a class-wide rate, and that is the version that becomes a problem.
 - Whether it is still current, or should be updated to a newer figure
 - Any other figure the Academy wants published, with the same three things:
-  the exact wording, the years it covers, and who published it (the Academy,
-  or the State Bar)
+  the exact wording, the period it covers, and who published it
 
 ---
 
