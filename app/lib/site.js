@@ -287,6 +287,18 @@ export const classSchedule = {
 // Bios sourced from cdtalaw.com/faculty. Photographs are marked
 // placeholders. The school owes real photography before launch.
 // ============================================================
+// PHOTOGRAPHS, added 2026-09-08.
+// `img` is the Academy's own headshot, pulled from cdtalaw.com/faculty and
+// self-hosted. Only the nine whose FILENAME on that site names the person are
+// assigned: John-Dolan-portrait, IRENE-DOLAN-PHOTO, JOHN-EVANS-PHOTO, AJDolan,
+// PETE-NOLAN-PHOTO, ALEX-REED-PHOTO, SAM-TRUSSELL-PHOTO, D. Dye Photo, and
+// sheilawilliams.
+//
+// Four more headshots exist on that page under names that identify nobody
+// (IMG_5979, IMG_8760, unnamed, c1) and are NOT assigned. Putting the wrong
+// face on a named attorney at a law school is worse than a placeholder, and
+// the remaining entries already render a designed one. Ask the Academy which
+// is which before filling them in.
 export const faculty = [
   {
     slug: 'john-patrick-dolan',
@@ -294,6 +306,7 @@ export const faculty = [
     role: 'President, CEO & Dean',
     teaching: 'Founder',
     initials: 'JD',
+    img: '/img/faculty/john-patrick-dolan.webp',
     teaser:
       'A California criminal trial lawyer who has been practicing criminal defense for over forty years, and a State Bar Certified Specialist in Criminal Law. He co-founded CDTA to close the gap between what law schools teach and what a courtroom demands.',
     credentials: [
@@ -313,6 +326,7 @@ export const faculty = [
     role: 'Co-Founder & Registrar',
     teaching: 'Administration',
     initials: 'IG',
+    img: '/img/faculty/irene-garcia-dolan.webp',
     teaser:
       'Co-founder of CDTA and the person who runs it day to day: admissions, eligibility, State Bar compliance and certifications. She is also President of LawTalk, MCLE.',
     credentials: [
@@ -350,6 +364,7 @@ export const faculty = [
     role: 'Dean of Academic Excellence',
     teaching: 'Retired Judge, Riverside County Superior Court',
     initials: 'JE',
+    img: '/img/faculty/john-g-evans.webp',
     teaser:
       'A judge of the Riverside County Superior Court from 2008 to 2024, and a civil litigator in private practice for the twenty-nine years before that.',
     credentials: [
@@ -370,6 +385,7 @@ export const faculty = [
     role: 'Professor of Real Property Law',
     teaching: 'Criminal Defense Attorney',
     initials: 'AB',
+    img: '/img/faculty/andrea-dolan-bouchard.webp',
     teaser:
       'A criminal defense attorney with Dolan Law Offices in Indio since 2012, who graduated first in her class academically from the College of the Desert Public Safety Academy.',
     credentials: [
@@ -389,6 +405,7 @@ export const faculty = [
     role: 'Professor of Evidence Law & Trial Advocacy',
     teaching: 'Of Counsel, Slovak, Baron, Empey, Murphy & Pinkney',
     initials: 'PN',
+    img: '/img/faculty/peter-nolan.webp',
     teaser:
       'Nineteen years prosecuting for Riverside County, named Statewide Prosecutor of the Year in 2013, now Of Counsel in civil litigation and municipal law.',
     credentials: [
@@ -429,6 +446,7 @@ export const faculty = [
     role: 'Professor of Contract Law',
     teaching: 'Principal, The Reed Firm',
     initials: 'AR',
+    img: '/img/faculty/alex-reed.webp',
     teaser:
       'Principal of The Reed Firm in Indio, practicing employment law and criminal defense, and teaching the contract doctrine underneath both.',
     credentials: [
@@ -447,6 +465,7 @@ export const faculty = [
     role: 'Professor of Tort Law & Civil Procedure',
     teaching: 'Sole Practitioner, Law Offices of Samuel F. Trussell',
     initials: 'ST',
+    img: '/img/faculty/samuel-trussell.webp',
     teaser:
       'Practicing personal injury law since 1986, teaching torts and civil procedure from the plaintiff’s side of the room.',
     credentials: [
@@ -466,6 +485,7 @@ export const faculty = [
     role: 'Professor of Professional Responsibility & Ethics',
     teaching: 'Co-Founder, Blalock Dye Law, LLP',
     initials: 'DD',
+    img: '/img/faculty/danielle-dye.webp',
     teaser:
       'A CDTA graduate, class of 2017, who came back to teach professional responsibility and ethics.',
     credentials: [
@@ -503,7 +523,7 @@ export const faculty = [
 export const additionalFaculty = [
   { name: 'Jenny Doling', role: '' },
   { name: 'Natalie Keller', role: 'Riverside County Superior Court Commissioner' },
-  { name: 'Sheila Williams', role: '' },
+  { name: 'Sheila Williams', role: '', img: '/img/faculty/sheila-williams.webp' },
   { name: 'Anyse Smith', role: '' },
   { name: 'Isabel Torres', role: '' },
   { name: 'Cindy Myers', role: '' }

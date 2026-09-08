@@ -27,7 +27,11 @@ export default function Faculty() {
               role="group" tabIndex={0} aria-label="Faculty">
             {faculty.map((f) => (
               <article className="fac-card tile" key={f.slug}>
-                <div className="fac-img img-reveal"><Placeholder label={f.name} initials={f.initials} /></div>
+                <div className="fac-img img-reveal">
+                  {f.img
+                    ? <img src={f.img} alt={`${f.name}, ${f.role}, CDTA College of Law`} loading="lazy" width="900" height="1125" />
+                    : <Placeholder label={f.name} initials={f.initials} />}
+                </div>
                 <div className="fac-body">
                   <div className="fac-role">{f.role}</div>
                   <h2 className="fac-name">{f.name}</h2>
