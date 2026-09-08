@@ -17,6 +17,8 @@ export default function Faculty() {
         label="The People in the Room"
         title={<>Taught by the people who <em>practice.</em></>}
         lede="Most classes at CDTA are led by two instructors. They are trial lawyers, prosecutors, public defenders and judges, and they teach in the courtrooms they work in."
+        img="/img/classroom.webp"
+        alt="A CDTA class in session, an instructor at the board working through issue, rule, application and conclusion."
       />
 
       <section className="prose" style={{ paddingBottom: 40 }}>

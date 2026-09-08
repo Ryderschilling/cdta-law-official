@@ -508,3 +508,26 @@ export const additionalFaculty = [
   { name: 'Isabel Torres', role: '' },
   { name: 'Cindy Myers', role: '' }
 ];
+
+// ============================================================
+// 360 CAMPUS TOUR
+// The Academy already has a CloudPano tour of the building, embedded
+// on the old cdtalaw.com/campus page. It is the single most
+// persuasive thing on that site: three real courtrooms you can walk
+// through before you ever call.
+//
+// TO TURN IT ON: open the tour on the old site, right-click inside
+// it and choose "Copy frame address", or get the share link from
+// whoever owns the CloudPano account. Paste it as `url` below.
+// Nothing else needs to change.
+//
+// NOTE FOR THE ACADEMY: the tour's own overlay currently reads
+// "Dolan Law Offices" with John's direct phone and email, and every
+// scene is labelled DolanLaw#6 through DolanLaw#16. Same building,
+// but on a law school's campus page it reads as the wrong
+// organisation. Worth re-branding inside CloudPano before launch.
+// ============================================================
+export const virtualTour = {
+  url: null,
+  title: 'Walk the trial, appellate and federal courtrooms'
+};

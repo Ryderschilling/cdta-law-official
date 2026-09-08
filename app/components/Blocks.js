@@ -4,9 +4,17 @@ import {
   UNACCREDITED_DISCLOSURE, MCLE_STATE_BAR_URL
 } from '../lib/site';
 
-export function PageHero({ crumbs = [], label, title, lede }) {
+// `img` is optional. When it is set the hero carries a photograph behind the
+// type, scrimmed hard enough that the h1 and the lede keep their contrast on
+// their own. Only use ACADEMY-SUPPLIED photography here: an image behind a page
+// title reads as a picture of that page's subject, so a stock room under the
+// word "Faculty" is a claim about this school's building.
+export function PageHero({ crumbs = [], label, title, lede, img, alt }) {
   return (
-    <section className="page-hero">
+    <section className={`page-hero${img ? ' has-img' : ''}`}>
+      {img && (
+        <div className="ph-img" style={{ backgroundImage: `url('${img}')` }} role="img" aria-label={alt} />
+      )}
       <div className="wrap">
         {crumbs.length > 0 && (
           <nav className="breadcrumb" aria-label="Breadcrumb">

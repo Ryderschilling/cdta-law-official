@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import VirtualTour from '../components/VirtualTour';
 import { PageHero, CTA, Photo } from '../components/Blocks';
-import { school, addressLine, courtrooms, classSchedule, SERVICE_AREA } from '../lib/site';
+import { school, addressLine, courtrooms, classSchedule, SERVICE_AREA, virtualTour } from '../lib/site';
 
 export const metadata = {
   title: 'The Campus',
@@ -45,6 +46,25 @@ export default function Campus() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 360 tour. Sits straight after the courtroom list, because the list is
+          the claim and the tour is the proof. */}
+      <section className="tour-band">
+        <div className="wrap">
+          <div className="sec-label reveal">
+            <div className="line" aria-hidden="true" />
+            <span>Look Around</span>
+          </div>
+          <h2 className="reveal">Walk the building before you <em>visit.</em></h2>
+          <p className="tour-lede reveal">
+            The trial, appellate and federal courtrooms are the reason to come and see the campus.
+            This is all three of them, from wherever you are.
+          </p>
+          <div className="reveal">
+            <VirtualTour tour={virtualTour} poster="/img/courtroom.webp" />
           </div>
         </div>
       </section>
