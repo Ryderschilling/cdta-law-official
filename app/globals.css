@@ -38,7 +38,8 @@
      Purple leads, red is a sharp accent only. Every value re-derived to
      WCAG 2.1 AA against the ground it actually sits on: a deep purple is
      invisible on near-black, so the on-ink purples are light and the
-     on-paper purple is deep. Do not swap one for the other. */
+     on-paper purple is deep. Do not swap one for the other.
+
      2026-09-10, Dave: "make the purple more royal." The old values were a
      dusty lavender (56% saturation). Royal means saturated and deep, so
      every purple moved to hue 268 at 70-100% saturation, and the solid
