@@ -2,7 +2,10 @@ import { NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
 
-const TO = process.env.CONTACT_TO || 'Irene@CDTALAW.com';
+// Every form lands with both, per Dave 2026-10-03.
+// CONTACT_TO in Vercel overrides it as a comma-separated list.
+const TO = (process.env.CONTACT_TO || 'irene@lawtalkmcle.com,angela@dolanlawoffices.com')
+  .split(',').map((s) => s.trim()).filter(Boolean);
 const FROM = process.env.CONTACT_FROM || 'CDTA Website <website@cdtalaw.com>';
 const PHONE = '(760) 342-0900';
 
@@ -77,9 +80,9 @@ export async function POST(req) {
       headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         from: FROM,
-        to: [TO],
+        to: TO,
         reply_to: email?.trim() || undefined,
-        subject: `${source ? 'Student intake' : 'Admissions inquiry'}, ${name}${interest ? ` (${interest})` : ''}`,
+        subject: `${source === 'Apply page' ? 'Apply request' : source ? 'Student intake' : 'Admissions inquiry'}, ${name}${interest ? ` (${interest})` : ''}`,
         html
       })
     });

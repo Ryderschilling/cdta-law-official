@@ -19,7 +19,9 @@ const EDUCATION = [
   'Fewer than 60 credits, or not sure'
 ];
 
-export default function LeadForm() {
+// `quick` is the Apply page version, per Dave 2026-10-03: "no drop downs, just
+// a simple form". Same fields minus the two selects and the location line.
+export default function LeadForm({ quick = false }) {
   const [v, setV] = useState(EMPTY);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState(null);
@@ -72,7 +74,7 @@ export default function LeadForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(v)
+        body: JSON.stringify(quick ? { ...v, source: 'Apply page' } : v)
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
@@ -136,6 +138,7 @@ export default function LeadForm() {
         <input id="phone" name="phone" type="tel" autoComplete="tel" value={v.phone} onChange={set('phone')} />
       </div>
 
+      {!quick && <>
       <div className="field">
         <label htmlFor="interest">What are you asking about?</label>
         <select id="interest" name="interest" value={v.interest} onChange={set('interest')}>
@@ -161,6 +164,7 @@ export default function LeadForm() {
         />
         <div className="hint">Students living 50 miles or more from the Indio campus may qualify for the Distance Learning Option.</div>
       </div>
+      </>}
 
       <div className="field">
         <label htmlFor="message">What would you like to know? <span className="req" aria-hidden="true">*</span></label>

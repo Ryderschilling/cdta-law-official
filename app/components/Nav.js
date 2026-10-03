@@ -88,6 +88,11 @@ export default function Nav() {
           {hasAlumni() && <Link href="/alumni">Alumni</Link>}
           <Link href="/mcle">MCLE</Link>
           <Link href="/admissions">Admissions</Link>
+          {/* Phone on every page, per Dave 2026-10-03. Visible 721px and up;
+              below that the fixed CallBar carries it. */}
+          <a className="nav-phone" href={`tel:${school.phoneRaw}`} aria-label={`Call the Academy, ${school.phone}`}>
+            {school.phone}
+          </a>
           <Link href="/admissions/apply" className="nav-cta">Apply Now</Link>
           <button
             className="nav-toggle"

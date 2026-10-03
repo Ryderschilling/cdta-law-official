@@ -122,6 +122,8 @@ nav.site-nav.scrolled{padding:12px 48px;background:rgba(12,15,20,.9);backdrop-fi
 .nav-links a:not(.nav-cta):hover::after{width:100%}
 .nav-cta{border:1px solid var(--pur);color:var(--pur)!important;padding:12px 24px;transition:background .35s var(--ease),color .35s var(--ease)}
 .nav-cta:hover{background:var(--pur-royal);border-color:var(--pur-royal);color:#fff!important}
+.nav-links a.nav-phone{color:var(--paper);letter-spacing:.08em;font-weight:400}
+.nav-links a.nav-phone:hover{color:var(--pur-bright)}
 .nav-toggle{display:none;background:none;border:1px solid var(--hair);color:var(--paper);padding:10px 16px;min-height:44px;min-width:64px;cursor:pointer;font-family:var(--cond);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
 .mobile-menu{display:none}
 
@@ -671,6 +673,7 @@ footer{background:var(--ink);border-top:1px solid var(--pur-line-soft);padding:8
 /* ---------- mobile call bar ---------- */
 .call-bar{display:none}
 @media(max-width:720px){
+  .nav-links a.nav-phone{display:none}
   .call-bar{display:grid;grid-template-columns:1.3fr 1fr;gap:1px;position:fixed;left:0;right:0;bottom:0;z-index:1100;
     background:var(--hair);border-top:1px solid var(--pur-line-soft);
     padding-bottom:env(safe-area-inset-bottom)}
@@ -706,9 +709,15 @@ footer{background:var(--ink);border-top:1px solid var(--pur-line-soft);padding:8
   .fac-grid,.post-grid,.dark-grid,.dark-grid.four,.card-grid{grid-template-columns:repeat(2,1fr)}
   .dark-grid.four{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:1024px){
+/* Nav collapses to Menu + phone at 1180, not 1024, since the phone number
+   joined the bar (Dave 2026-10-03). With it, the full link row needs ~1180px
+   measured with the real Oswald. 1181-1299 tightens the gaps to fit. */
+@media(min-width:1181px) and (max-width:1299px){
+  .nav-links{gap:18px}
+}
+@media(max-width:1180px){
   nav.site-nav,nav.site-nav.scrolled{padding:14px 26px;background:rgba(12,15,20,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--pur-line-soft)}
-  .nav-links a:not(.nav-toggle){display:none}
+  .nav-links a:not(.nav-toggle):not(.nav-phone){display:none}
   .nav-toggle{display:block}
   .mobile-menu{display:block;position:fixed;inset:0;z-index:940;background:var(--ink);
     padding:82px 24px calc(40px + env(safe-area-inset-bottom));
@@ -744,6 +753,8 @@ footer{background:var(--ink);border-top:1px solid var(--pur-line-soft);padding:8
      condensed face, same 13px, so the two do not read as competing buttons. */
   .mobile-menu .mm-call{justify-content:center;margin-top:22px;border:1px solid var(--pur-royal);background:var(--pur-royal);color:#fff;
     font-family:var(--cond);font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;min-height:54px}
+}
+@media(max-width:1024px){
   .mission-grid,.feature-grid,.two-col{grid-template-columns:1fr;gap:56px}
   .sticky-col{position:static}
   .profile{grid-template-columns:1fr;gap:40px}

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { PageHero, Disclosure } from '../../components/Blocks';
-import StudentIntake from '../../components/StudentIntake';
+import LeadForm from '../../components/LeadForm';
 import { school, addressLine, admissionRequirements } from '../../lib/site';
 
 export const metadata = {
@@ -17,7 +17,7 @@ export default function Apply() {
         crumbs={[{ label: 'Admissions', href: '/admissions' }, { label: 'Apply' }]}
         label="Apply"
         title={<>Start the <em>conversation.</em></>}
-        lede="A few multiple choice questions, about two minutes. It is not an application and it does not admit you. It tells the Registrar where you are so she can tell you what the next step actually is."
+        lede="Your name, how to reach you, and a line about what you are looking for. It is not an application and it does not admit you. The Registrar will reach out with the next step."
       />
 
       <section className="prose">
@@ -25,9 +25,9 @@ export default function Apply() {
           <div className="form-grid">
             <div>
               <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 400, fontSize: 30, marginBottom: 26 }}>
-                Student intake
+                Quick apply
               </h2>
-              <StudentIntake />
+              <LeadForm quick />
             </div>
 
             <div>
